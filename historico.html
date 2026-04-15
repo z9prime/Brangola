@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brangola - Arquivo de Avaliação</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <header class="global-header">
+    <nav>
+      <img src="logo/logo.png" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <a href="index.html">INSERIR DADOS</a>
+      <a href="historico.html" class="active">ARQUIVO DE AVALIAÇÃO</a>
+      <a href="melhores.html">PÓDIO DA MATRIX</a>
+      <button id="btn-logout" class="cyber-btn secondary" style="margin-left:auto; font-size:0.7em;">DESCONECTAR</button>
+    </nav>
+  </header>
+
+  <h1 class="glitch" data-text="ARQUIVO DE AVALIAÇÃO">ARQUIVO DE AVALIAÇÃO</h1>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="melhores.html" class="cyber-btn primary" style="text-decoration:none;">VISUALIZAR PÓDIO 🏆</a>
+  </div>
+
+  <input type="text" id="busca" placeholder="Escanear base de dados..." />
+
+  <div id="categorias" style="display:flex; justify-content:center; flex-wrap:wrap; margin-bottom: 20px;"></div>
+  
+  <div id="historico" class="grid-obras"></div>
+
+  <template id="template-historico">
+    <div class="card">
+      <img class="imagem-obra" src="" alt="Capa" />
+      <h2 class="titulo"></h2>
+      <p class="categoria"></p>
+      
+      <div class="notas-container">
+        <div class="notas-categorias" style="flex: 1; margin-right: 15px; font-size:0.9em; line-height: 1.6;">
+          <h3 style="color:var(--neon-cyan); margin-top:0;">Médias do Esquadrão</h3>
+          <div class="medias-detalhe"></div>
+        </div>
+        <div class="nota-final">
+          <h3 style="color:var(--neon-purple); margin-top:0;">Média Final</h3>
+          <span class="nota-final-numero"></span>
+        </div>
+      </div>
+      
+      <div class="comentarios-amigos">
+        <h3 style="color:var(--neon-green); font-size: 1.1em;border-bottom: 1px dashed rgba(0, 255, 102, 0.4); padding-bottom: 5px;">Registos Pessoais</h3>
+        <div class="lista-comentarios"></div>
+      </div>
+
+      <div class="card-botoes">
+        <!-- O botão editar vai aparecer se o utilizador logado tiver uma avaliação para esta obra -->
+        <button class="btn-editar" style="display:none;">Editar Minha Avaliação</button>
+        <!-- O botão excluir vai aparecer se o utilizador logado tiver uma avaliação para esta obra -->
+        <button class="btn-excluir" style="display:none;">Excluir Minha Avaliação</button>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="historico.js"></script>
+</body>
+</html>

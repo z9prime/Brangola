@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brangola - Sugestões Pendentes</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <header class="global-header">
+    <nav>
+      <img src="logo/logo.png" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <a href="index.html">INSERIR DADOS</a>
+      <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
+      <a href="melhores.html">PÓDIO DA MATRIX</a>
+      <button id="btn-logout" class="cyber-btn secondary" style="margin-left:auto; font-size:0.7em;">DESCONECTAR</button>
+    </nav>
+  </header>
+
+  <h1 class="glitch" data-text="SUGESTÕES DA REDE">SUGESTÕES DA REDE</h1>
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="add-recomendacao.html" class="cyber-btn primary" style="text-decoration:none;">ADICIONAR NOVA SUGESTÃO ➕</a>
+  </div>
+
+  <div id="lista-recomendacoes" style="max-width: 800px; margin: 0 auto;">
+    <!-- Renderizado por JS -->
+    <p style="text-align:center; color:var(--text-secondary);">Analisando base de sugestões...</p>
+  </div>
+
+  <template id="template-recomendacao">
+    <div class="card" style="margin-bottom: 15px;">
+      <button class="btn-excluir" style="position: absolute; top: 15px; right: 15px;">X</button>
+      <h2 class="rec-titulo" style="font-family:'Orbitron'; color:var(--neon-cyan); margin: 0 0 10px 0;"></h2>
+      <p class="rec-info">Tipo: <span class="rec-tipo" style="color:var(--neon-green);"></span></p>
+      <p class="rec-info">Sugerido por: <strong class="rec-quem" style="color:var(--neon-purple);"></strong></p>
+      <a href="#" class="rec-link cyber-btn secondary" target="_blank" style="display:inline-block; margin-top:10px; font-size: 0.8em; text-decoration:none;">ACESSAR LINK 🔗</a>
+    </div>
+  </template>
+
+  <script type="module" src="ver-recomendacoes.js"></script>
+</body>
+</html>

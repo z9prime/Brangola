@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brangola - Inserir Sugestão</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="global-header">
+    <nav>
+      <img src="logo/logo.png" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <a href="index.html">INSERIR DADOS</a>
+      <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
+      <a href="melhores.html">PÓDIO DA MATRIX</a>
+      <button id="btn-logout" class="cyber-btn secondary" style="margin-left:auto; font-size:0.7em;">DESCONECTAR</button>
+    </nav>
+  </header>
+
+  <h1 class="glitch" data-text="NOVA SUGESTÃO">NOVA SUGESTÃO</h1>
+
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="ver-recomendacoes.html" class="cyber-btn secondary" style="text-decoration:none;">VISUALIZAR SUGESTÕES DA REDE</a>
+  </div>
+
+  <form id="recomendacao-form" class="cyber-form" style="max-width: 600px; margin: 0 auto;">
+    <div class="input-group">
+      <label>Nome do Arquivo:</label>
+      <input type="text" id="titulo" required />
+    </div>
+
+    <div class="input-group">
+      <label>Classificação (Tipo):</label>
+      <select id="tipo" required style="width: 100%; padding: 12px; background: var(--input-bg); border: 1px solid var(--glass-border); color: white; font-family: 'Rajdhani', sans-serif; font-size: 1.1em; border-radius: 4px;">
+        <option value="">Selecione...</option>
+        <option value="Filme">Filme</option>
+        <option value="Série">Série</option>
+        <option value="Anime">Anime</option>
+        <option value="Dorama">Dorama</option>
+        <option value="Jogo">Jogo</option>
+        <option value="Outro">Outro</option>
+      </select>
+    </div>
+
+    <!-- O "Quem sugeriu" será inserido automaticamente via sistema (Auth) -->
+    
+    <div class="input-group">
+      <label>Link (URL do Trailer ou Base de Dados) - Opcional:</label>
+      <input type="url" id="link_extra" placeholder="https://" />
+    </div>
+
+    <button type="submit" class="cyber-btn primary" style="width:100%;">ENVIAR SUGESTÃO PARA REDE</button>
+  </form>
+  
+  <script type="module" src="add-recomendacao.js"></script>
+</body>
+</html>

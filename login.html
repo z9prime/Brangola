@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brangola - Acesso ao Sistema</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="login-body">
+
+  <div class="login-container">
+    <div class="glow-orb"></div>
+    <div class="logo-box">
+      <!-- You can put an img tag here if you have a logo image -->
+      <img src="logo/logo.png" alt="Brangola Logo" class="brangola-logo" onerror="this.style.display='none'" />
+      <h1 class="glitch" data-text="BRANGOLA">BRANGOLA</h1>
+      <p class="subtitle">SISTEMA INTEGRADO DE AVALIAÇÃO MATRIX</p>
+    </div>
+
+    <form id="auth-form" class="cyber-form">
+      <!-- Título dinâmico do formulário -->
+      <h3 id="form-title" style="color:var(--neon-purple); margin-top:0; font-size:1.2em; text-align:center;">LOGIN DO OPERADOR</h3>
+
+      <div class="input-group">
+        <label for="username">NOME DO OPERADOR (USUÁRIO)</label>
+        <input type="text" id="username" required placeholder="Digite seu nome (ex: Deudeu)" autocomplete="off" />
+      </div>
+      
+      <div class="input-group">
+        <label for="password">CÓDIGO DE ACESSO (SENHA)</label>
+        <input type="password" id="password" required placeholder="*********" autocomplete="new-password" />
+      </div>
+
+      <div class="auth-buttons">
+        <button type="submit" id="btn-submit" class="cyber-btn primary" style="width: 100%;">ENTRAR NA MATRIX</button>
+      </div>
+
+      <p style="text-align: center; margin-top: 20px;">
+        <a href="#" id="toggle-mode" style="color:var(--text-secondary); text-decoration:none; font-size:0.9em; transition: 0.3s;">Quero Registrar-me</a>
+      </p>
+
+      <p id="auth-msg" class="auth-message"></p>
+    </form>
+  </div>
+
+  <script type="module" src="login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brangola - Pódio da Matrix</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  
+  <header class="global-header">
+    <nav>
+      <img src="logo/logo.png" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <a href="index.html">INSERIR DADOS</a>
+      <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
+      <a href="melhores.html" class="active">PÓDIO DA MATRIX</a>
+      <button id="btn-logout" class="cyber-btn secondary" style="margin-left:auto; font-size:0.7em;">DESCONECTAR</button>
+    </nav>
+  </header>
+
+  <h1 class="glitch" data-text="PÓDIO SUPREMO">PÓDIO SUPREMO</h1>
+  <p style="text-align: center; color: var(--text-secondary); max-width: 600px; margin: 0 auto 30px;">
+    Sistema de classificação com base nas médias consolidadas operadas pelo escuadrão completo na rede Brangola.
+  </p>
+
+  <div style="text-align: center;">
+    <a href="historico.html" class="cyber-btn primary" style="text-decoration:none;">VISUALIZAR ARQUIVO 📔</a>
+  </div>
+
+  <div id="tabs-categorias" style="display:flex; justify-content:center; flex-wrap:wrap; margin-top:20px;">
+    <!-- Renderizado via JS -->
+  </div>
+
+  <div id="podio">
+    <!-- Renderizado pelo template abaixo -->
+  </div>
+
+  <template id="template-melhores">
+    <div class="card podio-item">
+      <div class="rank-badge" style="position: absolute; top: 10px; right: 10px; font-family: 'Orbitron'; font-size: 1.5em; font-weight: 900; color: white;"></div>
+      <img class="imagem-obra" src="" alt="Capa" />
+      <h2 class="titulo" style="text-align: center; margin-bottom: 2px;"></h2>
+      <p class="categoria" style="text-align: center;"></p>
+      <div class="notas-container" style="justify-content: center; flex-direction: column;">
+        <h3 style="margin:0; font-size:0.8em; color:var(--text-secondary);">AVALIAÇÃO GLOBAL BRANGOLA</h3>
+        <span class="nota-final-numero" style="font-size: 3em;"></span>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="melhores.js"></script>
+</body>
+
+</html>
