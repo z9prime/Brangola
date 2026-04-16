@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function carregarTop10() {
   const container = document.getElementById('podio');
-  container.innerHTML = '<p style="text-align:center;width:100%;color:var(--neon-cyan);">Calculando Ranking Global Matrix...</p>';
+  container.innerHTML = '<p style="text-align:center;width:100%;color:var(--tech-cyan);">Calculando Ranking Global Estelar...</p>';
 
   // Buscar os dados da view 'media_obras' que já traz as médias calculadas
   const { data, error } = await supabase
@@ -33,7 +33,7 @@ async function carregarTop10() {
     .order('media_geral', { ascending: false });
 
   if (error) {
-    container.innerHTML = `<p style="color:var(--neon-pink);">Erro ao interceptar os dados: ${error.message}</p>`;
+    container.innerHTML = `<p style="color:#ff6b6b;">Erro ao interceptar os dados: ${error.message}</p>`;
     return;
   }
 
