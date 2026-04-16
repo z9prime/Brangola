@@ -68,6 +68,14 @@ async function carregarDadosAvaliacao(id) {
   document.getElementById('imagem_url').value = data.obras.imagem_url;
   document.getElementById('temporada').value = data.temporada;
 
+  // Lógica de Ocultar Temporada
+  const tipo = data.obras.categoria ? data.obras.categoria.toLowerCase() : '';
+  if (tipo.includes('filme')) {
+    document.getElementById('campo-temporada').style.display = 'none';
+  } else {
+    document.getElementById('campo-temporada').style.display = 'block';
+  }
+
   if (data.historia !== null) document.getElementById('historia').value = data.historia;
   if (data.personagens !== null) document.getElementById('personagens').value = data.personagens;
   if (data.visual_animacao !== null) document.getElementById('visual_animacao').value = data.visual_animacao;
@@ -109,7 +117,7 @@ async function atualizarAvaliacao() {
   if (error) {
     alert('Falha na atualização. Erro: ' + error.message);
   } else {
-    alert('Registo atualizado na Matrix!');
+    alert('Dados sincronizados com sucesso na base estelar!');
     window.location.href = 'historico.html';
   }
 }
