@@ -13,11 +13,13 @@
 
   <header class="global-header">
     <nav>
-      <img src="logo/logo.png" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
-      <a href="index.html">INSERIR DADOS</a>
-      <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
-      <a href="melhores.html">PÓDIO DA MATRIX</a>
-      <button id="btn-logout" class="cyber-btn secondary" style="margin-left:auto; font-size:0.7em;">DESCONECTAR</button>
+      <img src="logo/3da2c93b50f94d3195202a67860a61c8.jpg" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <div class="nav-links">
+        <a href="index.html">INSERIR DADOS</a>
+        <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
+        <a href="melhores.html">RANKING ESTELAR</a>
+      </div>
+      <button id="btn-logout" class="cyber-btn secondary" style="font-size:0.7em;">DESCONECTAR</button>
     </nav>
   </header>
 
@@ -27,9 +29,9 @@
     <button id="btn-voltar" class="cyber-btn secondary">CANCELAR EDIÇÃO</button>
   </div>
 
-  <form id="editar-form" style="max-width: 650px; margin: 0 auto; padding: 30px; background: var(--glass-bg); border: 1px solid var(--glass-border); border-top: 3px solid var(--neon-cyan); border-radius: 8px; backdrop-filter: blur(10px);">
-    <fieldset style="border: 1px solid rgba(0, 243, 255, 0.3);">
-      <legend style="color: var(--neon-cyan); text-shadow: var(--glow-cyan);">DADOS INICIAIS DA OBRA GERAL</legend>
+  <form id="editar-form" class="cyber-form" style="max-width: 650px; margin: 0 auto;">
+    <fieldset>
+      <legend>DADOS INICIAIS DA OBRA GERAL</legend>
 
       <label>Nome do Registo:
         <input type="text" id="titulo" readonly style="background: rgba(0,0,0,0.8); cursor: not-allowed;" />
@@ -43,52 +45,37 @@
         <input type="url" id="imagem_url" readonly style="background: rgba(0,0,0,0.8); cursor: not-allowed;" />
       </label>
 
+    <div id="campo-temporada" class="input-group">
       <label>Temporada:
-        <input type="text" id="temporada" readonly style="background: rgba(0,0,0,0.8); cursor: not-allowed;" />
+        <input type="text" id="temporada" readonly />
       </label>
-      <p style="font-size: 0.8em; color: var(--text-secondary);">Para alterar os dados base das obras globais da matrix entre em contato com o Admin Supremo.</p>
-    </fieldset>
+    </div>
+    <p style="font-size: 0.8em; color: var(--text-secondary);">Para alterar os dados base, contacte o Comando Central.</p>
+  </fieldset>
 
-    <fieldset>
-      <legend>SUAS NOTAS E REGISTOS</legend>
-      
-      <!-- 7 Critérios numéricos -->
-      <label>História: <input type="number" id="historia" min="0" max="10" step="0.1" required /></label>
-      <label>Personagens: <input type="number" id="personagens" min="0" max="10" step="0.1" required /></label>
-      <label>Visual / Animação: <input type="number" id="visual_animacao" min="0" max="10" step="0.1" required /></label>
-      <label>Som e Música: <input type="number" id="som_musica" min="0" max="10" step="0.1" required /></label>
-      <label>Ritmo: <input type="number" id="ritmo" min="0" max="10" step="0.1" required /></label>
-      <label>Originalidade: <input type="number" id="originalidade" min="0" max="10" step="0.1" required /></label>
-      <label>Desfecho / Final: <input type="number" id="desfecho" min="0" max="10" step="0.1" required /></label>
+  <fieldset>
+    <legend>SUAS NOTAS E REGISTOS</legend>
+    <div class="notas-grid">
+      <div class="input-group"><label>História: <input type="number" id="historia" min="0" max="10" step="0.1" required /></label></div>
+      <div class="input-group"><label>Personagens: <input type="number" id="personagens" min="0" max="10" step="0.1" required /></label></div>
+      <div class="input-group"><label>Visual / Animação: <input type="number" id="visual_animacao" min="0" max="10" step="0.1" required /></label></div>
+      <div class="input-group"><label>Som e Música: <input type="number" id="som_musica" min="0" max="10" step="0.1" required /></label></div>
+      <div class="input-group"><label>Ritmo: <input type="number" id="ritmo" min="0" max="10" step="0.1" required /></label></div>
+      <div class="input-group"><label>Originalidade: <input type="number" id="originalidade" min="0" max="10" step="0.1" required /></label></div>
+      <div class="input-group"><label>Desfecho / Final: <input type="number" id="desfecho" min="0" max="10" step="0.1" required /></label></div>
+    </div>
 
-      <hr style="border: 0; border-bottom: 1px dashed rgba(188, 19, 254, 0.5); margin: 25px 0;">
+    <hr style="border: 0; border-bottom: 1px dashed var(--glass-border); margin: 25px 0;">
 
-      <!-- Perguntas Subjetivas / Textuais -->
-      <label style="color: var(--neon-cyan);">Personagem Favorito:
-        <input type="text" id="personagem_favorito" />
-      </label>
-      
-      <label style="color: var(--neon-cyan);">Recomendarias?
-        <input type="text" id="recomendarias" placeholder="Sim/Não/Talvez..." />
-      </label>
-      
-      <label style="color: var(--neon-cyan);">Melhor Cena / Momento:
-        <input type="text" id="melhor_cena" />
-      </label>
-      
-      <label style="color: var(--neon-cyan);">Superou as expectativas?
-        <input type="text" id="superou_expectativas" />
-      </label>
+    <div class="input-group"><label>Personagem Favorito: <input type="text" id="personagem_favorito" /></label></div>
+    <div class="input-group"><label>Recomendarias? <input type="text" id="recomendarias" placeholder="Sim/Não/Talvez..." /></label></div>
+    <div class="input-group"><label>Melhor Cena / Momento: <input type="text" id="melhor_cena" /></label></div>
+    <div class="input-group"><label>Superou as expectativas? <input type="text" id="superou_expectativas" /></label></div>
+    <div class="input-group"><label>Define numa palavra: <input type="text" id="define_numa_palavra" /></label></div>
+  </fieldset>
 
-      <label style="color: var(--neon-cyan);">Define numa palavra:
-        <input type="text" id="define_numa_palavra" />
-      </label>
-    </fieldset>
-
-    <button type="submit" style="width: 100%; padding: 15px; background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green); font-family: 'Orbitron', sans-serif; font-size: 1em; letter-spacing: 2px; cursor: pointer; border-radius: 4px; transition: 0.3s; text-transform: uppercase;">
-      CONFIRMAR ATUALIZAÇÃO
-    </button>
-  </form>
+  <button type="submit" class="cyber-btn primary" style="width: 100%;">CONFIRMAR ATUALIZAÇÃO</button>
+</form>
 
   <script type="module" src="editar.js"></script>
 </body>
