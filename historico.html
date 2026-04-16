@@ -34,35 +34,38 @@
   <div id="historico" class="grid-obras"></div>
 
   <template id="template-historico">
-    <div class="card">
-      <img class="imagem-obra" src="" alt="Capa" />
-      <h2 class="titulo"></h2>
-      <p class="categoria"></p>
-      
-      <div class="notas-container">
-        <div class="notas-categorias" style="flex: 1; margin-right: 15px; font-size:0.85em; line-height: 1.5;">
-          <h3 style="color:var(--tech-cyan); margin-top:0; font-size:0.9em;">Médias do Comando</h3>
-          <div class="medias-detalhe"></div>
-        </div>
-        <div class="nota-final">
-          <h3 style="color:var(--star-white); margin-top:0; font-size:0.9em;">Geral</h3>
-          <span class="nota-final-numero"></span>
+    <div class="card movie-card">
+      <div class="poster-wrapper">
+        <img class="imagem-obra" src="" alt="Capa" />
+        <div class="poster-overlay">
+          <span class="ver-detalhes-text">VER INFORMAÇÕES</span>
         </div>
       </div>
-      
-      <div class="comentarios-amigos">
-        <h3 style="color:var(--tech-cyan); font-size: 1em; border-bottom: 1px solid var(--glass-border); padding-bottom: 5px;">Relatórios Pessoais</h3>
-        <div class="lista-comentarios"></div>
-      </div>
-
-      <div class="card-botoes">
-        <!-- O botão editar vai aparecer se o utilizador logado tiver uma avaliação para esta obra -->
-        <button class="btn-editar" style="display:none;">Editar Minha Avaliação</button>
-        <!-- O botão excluir vai aparecer se o utilizador logado tiver uma avaliação para esta obra -->
-        <button class="btn-excluir" style="display:none;">Excluir Minha Avaliação</button>
+      <div class="card-footer-basic">
+        <h2 class="titulo"></h2>
+        <div class="movie-stats">
+          <div class="stat">
+            <span class="stat-icon" style="color: #ffd700;">⭐</span>
+            <strong class="nota-final-numero"></strong>
+          </div>
+          <div class="stat">
+            <span class="stat-icon" style="color: var(--tech-cyan);">💬</span>
+             <span class="qtd-avaliacoes"></span> <span class="aval-label">avaliações</span>
+          </div>
+        </div>
       </div>
     </div>
   </template>
+
+  <!-- Modal de Detalhes da Obra -->
+  <div id="movie-modal" class="modal-overlay">
+    <div class="modal-container">
+      <span class="modal-close">&times;</span>
+      <div class="modal-content-grid" id="modal-content">
+        <!-- Conteúdo injetado via JS -->
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="historico.js"></script>
 </body>

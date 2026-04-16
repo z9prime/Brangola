@@ -36,22 +36,46 @@
     <!-- Renderizado via JS -->
   </div>
 
-  <div id="podio">
-    <!-- Renderizado pelo template abaixo -->
+  <div id="podium-top" class="podium-wrapper">
+    <!-- Top 3 renderizado aqui -->
+  </div>
+
+  <h2 class="glitch" data-text="OUTRAS CLASSIFICAÇÕES" style="font-size: 1.2em; margin-top: 40px; text-align: center;">OUTRAS CLASSIFICAÇÕES</h2>
+  
+  <div id="podio" class="grid-obras">
+    <!-- Restantes renderizados aqui -->
   </div>
 
   <template id="template-melhores">
-    <div class="card podio-item">
-      <div class="rank-badge" style="position: absolute; top: 10px; right: 10px; font-family: 'Orbitron'; font-size: 1.2em; font-weight: 900; color: white;"></div>
-      <img class="imagem-obra" src="" alt="Capa" />
-      <h2 class="titulo" style="text-align: center; margin-bottom: 2px;"></h2>
-      <p class="categoria" style="text-align: center;"></p>
-      <div class="notas-container" style="justify-content: center; flex-direction: column;">
-        <h3 style="margin:0; font-size:0.75em; color:var(--text-secondary);">AVALIAÇÃO GLOBAL BRANGOLA</h3>
-        <span class="nota-final-numero"></span>
+    <div class="card movie-card podio-item">
+      <div class="poster-wrapper">
+        <div class="rank-badge" style="position: absolute; top: 10px; right: 10px; font-family: 'Orbitron', Arial; font-size: 1.5em; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.8); z-index: 5;"></div>
+        <img class="imagem-obra" src="" alt="Capa" />
+        <div class="poster-overlay">
+          <span class="ver-detalhes-text">VER INFORMAÇÕES</span>
+        </div>
+      </div>
+      <div class="card-footer-basic">
+        <h2 class="titulo" style="text-align: center; font-size: 1.1em; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--star-white);"></h2>
+        <div class="movie-stats" style="justify-content: center;">
+          <div class="stat">
+            <span class="stat-icon" style="color: #ffd700;">⭐</span>
+            <strong class="nota-final-numero"></strong>
+          </div>
+        </div>
       </div>
     </div>
   </template>
+
+  <!-- Modal de Detalhes da Obra -->
+  <div id="movie-modal" class="modal-overlay">
+    <div class="modal-container">
+      <span class="modal-close">&times;</span>
+      <div class="modal-content-grid" id="modal-content">
+        <!-- Conteúdo injetado via JS -->
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="melhores.js"></script>
 </body>

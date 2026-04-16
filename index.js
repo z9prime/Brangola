@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tituloInput = document.getElementById('titulo');
     const categoriaSelect = document.getElementById('categoria');
     const imagemUrlInput = document.getElementById('imagem_url');
-    const buscaObraInput = document.getElementById('busca_obra');
     const sugestoesContainer = document.getElementById('sugestoes-obra');
     const campoTemporada = document.getElementById('campo-temporada');
 
@@ -40,64 +39,146 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!error) obrasExistentes = data;
     } catch (err) { console.error(err); }
 
-    // Lógica de Busca em Tempo Real
-    buscaObraInput.addEventListener('input', (e) => {
+    // Lógica de Busca Unificada no campo Título
+    tituloInput.addEventListener('input', (e) => {
         const termo = e.target.value.toLowerCase();
         sugestoesContainer.innerHTML = '';
         
-        if (termo.length < 1) {
-            sugestoesContainer.style.display = 'none';
-            return;
+        // Se já tínhamos uma obra selecionada e o utilizador mudou o texto, "desvinculamos" o ID
+        if (obraSelecionadaId) {
+            const obraOrig = obrasExistentes.find(o => o.id === obraSelecionadaId);
+            if (obraOrig && termo !== obraOrig.titulo.toLowerCase()) {
+                obraSelecionadaId = null;
+                categoriaSelect.disabled = false;
+                imagemUrlInput.readOnly = false;
+            }
+        }
+
+        // Resetar estado se o utilizador apagar o título
+        if (termo === '') {
+            obraSelecionadaId = null;
+            categoriaSelect.value = '';
+            categoriaSelect.disabled = false;
+            imagemUrlInput.value = '';
+            imagemUrlInput.readOnly = false;
+            verificarOcultarTemporada();
         }
 
         const filtradas = obrasExistentes.filter(o => o.titulo.toLowerCase().includes(termo));
         
-        if (filtradas.length > 0) {
-            filtradas.forEach(obra => {
+        // Mostrar sugestões existentes
+        filtradas.forEach(obra => {
+            const item = document.createElement('div');
+            item.className = 'sugestao-item';
+            item.innerHTML = `
+                <img src="${obra.imagem_url || ''}" class="sugestao-thumb" onerror="this.src='https://via.placeholder.com/45x60?text=?'">
+                <div class="sugestao-info">
+                    <span class="sugestao-nome">${obra.titulo}</span>
+                    <span class="sugestao-cat">${obra.categoria || 'Obra'}</span>
+                </div>
+            `;
+            item.addEventListener('click', () => selecionarObra(obra));
+            sugestoesContainer.appendChild(item);
+        });
+
+        // Item para Adicionar Novo Filme
+        if (termo.length > 0) {
+            const novoItem = document.createElement('div');
+            novoItem.className = 'sugestao-item sugestao-novo';
+            novoItem.innerHTML = `<span class="plus-icon">+</span> Adicionar nova obra: "${e.target.value}"`;
+            novoItem.addEventListener('click', () => {
+                const novoTitulo = e.target.value;
+                obraSelecionadaId = null;
+                tituloInput.value = novoTitulo;
+                tituloInput.focus();
+                categoriaSelect.value = '';
+                categoriaSelect.disabled = false;
+                imagemUrlInput.value = '';
+                imagemUrlInput.readOnly = false;
+                sugestoesContainer.style.display = 'none';
+                verificarOcultarTemporada();
+            });
+            sugestoesContainer.appendChild(novoItem);
+        }
+
+        sugestoesContainer.style.display = (termo.length > 0 || filtradas.length > 0) ? 'block' : 'none';
+    });
+
+    // Mostrar lista completa ao clicar no campo se estiver vazio
+    tituloInput.addEventListener('focus', () => {
+        if (tituloInput.value === '' && obrasExistentes.length > 0) {
+            sugestoesContainer.innerHTML = '';
+            obrasExistentes.slice(0, 5).forEach(obra => {
                 const item = document.createElement('div');
                 item.className = 'sugestao-item';
-                item.textContent = obra.titulo;
+                item.innerHTML = `
+                    <img src="${obra.imagem_url || ''}" class="sugestao-thumb" onerror="this.src='https://via.placeholder.com/45x60?text=?'">
+                    <div class="sugestao-info">
+                        <span class="sugestao-nome">${obra.titulo}</span>
+                        <span class="sugestao-cat">${obra.categoria || 'Obra'}</span>
+                    </div>
+                `;
                 item.addEventListener('click', () => selecionarObra(obra));
                 sugestoesContainer.appendChild(item);
             });
             sugestoesContainer.style.display = 'block';
-        } else {
-            sugestoesContainer.style.display = 'none';
         }
     });
 
     function selecionarObra(obra) {
         obraSelecionadaId = obra.id;
         tituloInput.value = obra.titulo;
-        tituloInput.readOnly = true;
         categoriaSelect.value = obra.categoria || '';
         categoriaSelect.disabled = true;
         imagemUrlInput.value = obra.imagem_url || '';
         imagemUrlInput.readOnly = true;
         
-        buscaObraInput.value = obra.titulo;
         sugestoesContainer.style.display = 'none';
-
-        // Disparar o toggle da temporada após preencher a categoria
         verificarOcultarTemporada();
     }
 
-    // Resetar campos se apagar a busca
-    buscaObraInput.addEventListener('blur', () => {
-        setTimeout(() => { sugestoesContainer.style.display = 'none'; }, 200);
+    // Fechar sugestões ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (e.target !== tituloInput && e.target !== sugestoesContainer) {
+            sugestoesContainer.style.display = 'none';
+        }
     });
 
     // Lógica de Ocultar Temporada
     categoriaSelect.addEventListener('change', verificarOcultarTemporada);
 
     function verificarOcultarTemporada() {
-        const tipo = categoriaSelect.value.toLowerCase();
+        const tipo = (categoriaSelect.value || '').toLowerCase();
         // Se for filme (Filmes ou Filme de...), oculta a temporada
         if (tipo.includes('filme')) {
             campoTemporada.style.display = 'none';
             document.getElementById('temporada').value = ''; // Limpa se estiver oculto
         } else {
             campoTemporada.style.display = 'block';
+        }
+    }
+
+    // Verificar dados pré-selecionados (via localStorage para evitar erro de URL muito longa)
+    const preObraStorage = localStorage.getItem('brangola_pre_obra');
+    if (preObraStorage) {
+        const obraData = JSON.parse(preObraStorage);
+        selecionarObra(obraData);
+        localStorage.removeItem('brangola_pre_obra'); // Limpa após usar
+    } else {
+        // Fallback: Verificar parâmetros da URL
+        const urlParams = new URL(window.location.href).searchParams;
+        const preObraId = urlParams.get('obra_id');
+        const preTitulo = urlParams.get('titulo');
+        const preCategoria = urlParams.get('categoria');
+        const preImagemUrl = urlParams.get('imagem_url');
+
+        if (preObraId && preTitulo) {
+            selecionarObra({
+                id: preObraId,
+                titulo: preTitulo,
+                categoria: preCategoria,
+                imagem_url: preImagemUrl
+            });
         }
     }
 
