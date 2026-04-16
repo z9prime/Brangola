@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function carregarHistorico() {
   const container = document.getElementById('historico');
-  container.innerHTML = '<p style="text-align:center;width:100%;color:var(--neon-cyan);">Acessando os registos da Matrix...</p>';
+  container.innerHTML = '<p style="text-align:center;width:100%;color:var(--tech-cyan);">Acessando os registos da Base Estelar...</p>';
 
   // Atenção: Tivemos de mudar de profiles para utilizadores no Fetch relacional
   const { data: obras, error } = await supabase
@@ -48,7 +48,7 @@ async function carregarHistorico() {
     .order('criado_em', { ascending: false });
 
   if (error) {
-    container.innerHTML = `<p style="color:var(--neon-pink);">Erro ao interceptar os dados: ${error.message}</p>`;
+    container.innerHTML = `<p style="color:#ff6b6b;">Erro ao interceptar os dados: ${error.message}</p>`;
     return;
   }
 
@@ -151,11 +151,11 @@ function renderizarObras(obras) {
         let avHtml = `<div class="comentario-amigo">
           <div class="nome-amigo">OP: ${nomeOperador} [Temporada: ${av.temporada}]</div>`;
         
-        if (av.personagem_favorito) avHtml += `<div><strong style="color:var(--neon-cyan)">Personagem:</strong> ${av.personagem_favorito}</div>`;
-        if (av.melhor_cena) avHtml += `<div><strong style="color:var(--neon-cyan)">Cena:</strong> ${av.melhor_cena}</div>`;
-        if (av.recomendarias) avHtml += `<div><strong style="color:var(--neon-cyan)">Recomenda:</strong> ${av.recomendarias}</div>`;
-        if (av.superou_expectativas) avHtml += `<div><strong style="color:var(--neon-cyan)">Expectativas:</strong> ${av.superou_expectativas}</div>`;
-        if (av.define_numa_palavra) avHtml += `<div><strong style="color:var(--neon-cyan)">Em uma palavra:</strong> ${av.define_numa_palavra}</div>`;
+        if (av.personagem_favorito) avHtml += `<div><strong style="color:var(--tech-cyan)">Personagem:</strong> ${av.personagem_favorito}</div>`;
+        if (av.melhor_cena) avHtml += `<div><strong style="color:var(--tech-cyan)">Cena:</strong> ${av.melhor_cena}</div>`;
+        if (av.recomendarias) avHtml += `<div><strong style="color:var(--tech-cyan)">Recomenda:</strong> ${av.recomendarias}</div>`;
+        if (av.superou_expectativas) avHtml += `<div><strong style="color:var(--tech-cyan)">Expectativas:</strong> ${av.superou_expectativas}</div>`;
+        if (av.define_numa_palavra) avHtml += `<div><strong style="color:var(--tech-cyan)">Em uma palavra:</strong> ${av.define_numa_palavra}</div>`;
         
         avHtml += `</div>`;
         listaComentarios.innerHTML += avHtml;
