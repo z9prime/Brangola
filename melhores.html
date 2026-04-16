@@ -13,11 +13,13 @@
   
   <header class="global-header">
     <nav>
-      <img src="logo/logo.png" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
-      <a href="index.html">INSERIR DADOS</a>
-      <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
-      <a href="melhores.html" class="active">PÓDIO DA MATRIX</a>
-      <button id="btn-logout" class="cyber-btn secondary" style="margin-left:auto; font-size:0.7em;">DESCONECTAR</button>
+      <img src="logo/3da2c93b50f94d3195202a67860a61c8.jpg" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <div class="nav-links">
+        <a href="index.html">INSERIR DADOS</a>
+        <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
+        <a href="melhores.html" class="active">RANKING ESTELAR</a>
+      </div>
+      <button id="btn-logout" class="cyber-btn secondary" style="font-size:0.7em;">DESCONECTAR</button>
     </nav>
   </header>
 
@@ -40,13 +42,13 @@
 
   <template id="template-melhores">
     <div class="card podio-item">
-      <div class="rank-badge" style="position: absolute; top: 10px; right: 10px; font-family: 'Orbitron'; font-size: 1.5em; font-weight: 900; color: white;"></div>
+      <div class="rank-badge" style="position: absolute; top: 10px; right: 10px; font-family: 'Orbitron'; font-size: 1.2em; font-weight: 900; color: white;"></div>
       <img class="imagem-obra" src="" alt="Capa" />
       <h2 class="titulo" style="text-align: center; margin-bottom: 2px;"></h2>
       <p class="categoria" style="text-align: center;"></p>
       <div class="notas-container" style="justify-content: center; flex-direction: column;">
-        <h3 style="margin:0; font-size:0.8em; color:var(--text-secondary);">AVALIAÇÃO GLOBAL BRANGOLA</h3>
-        <span class="nota-final-numero" style="font-size: 3em;"></span>
+        <h3 style="margin:0; font-size:0.75em; color:var(--text-secondary);">AVALIAÇÃO GLOBAL BRANGOLA</h3>
+        <span class="nota-final-numero"></span>
       </div>
     </div>
   </template>
