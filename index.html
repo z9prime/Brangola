@@ -6,67 +6,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brangola - Nova Avaliação</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
 
   <header class="global-header">
     <nav>
-      <img src="logo/logo.png" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
-      <a href="index.html" class="active">INSERIR DADOS</a>
-      <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
-      <a href="melhores.html">PÓDIO DA MATRIX</a>
-      <button id="btn-logout" class="cyber-btn secondary" style="margin-left:auto; font-size:0.7em;">DESCONECTAR</button>
+      <img src="logo/3da2c93b50f94d3195202a67860a61c8.jpg" alt="Brangola Logo" class="nav-logo" onerror="this.style.display='none'" />
+      <div class="nav-links">
+        <a href="index.html" class="active">INSERIR DADOS</a>
+        <a href="historico.html">ARQUIVO DE AVALIAÇÃO</a>
+        <a href="melhores.html">RANKING ESTELAR</a>
+      </div>
+      <button id="btn-logout" class="cyber-btn secondary pulse-tech" style="font-size:0.7em;">DESCONECTAR</button>
     </nav>
   </header>
 
   <h1 class="glitch" data-text="NOVA AVALIAÇÃO">NOVA AVALIAÇÃO</h1>
 
   <form id="avaliacao-form">
-    <fieldset style="border: 1px solid var(--neon-cyan);">
-      <legend style="color: var(--neon-cyan); text-shadow: var(--glow-cyan);">DADOS DA OBRA</legend>
+    <fieldset>
+      <legend>DADOS DA OBRA</legend>
 
-      <label>Obra existente no sistema? (Selecione se for nova temporada)
-        <select id="obra_existente">
-          <option value="">Não, inicializar novo registro...</option>
-        </select>
-      </label>
+      <div class="input-group" style="position:relative;">
+        <label>Pesquisar Obra Existente (Deixe em branco se for nova):</label>
+        <input type="text" id="busca_obra" placeholder="Procure por títulos existentes..." autocomplete="off" />
+        <div id="sugestoes-obra"></div>
+      </div>
 
-      <label>Nome do Registo:
+      <div class="input-group">
+        <label>Nome do Registo:</label>
         <input type="text" id="titulo" required />
-      </label>
+      </div>
 
-      <label>Classificação (Tipo):
+      <div class="input-group">
+        <label>Classificação (Tipo):</label>
         <select id="categoria" required>
           <option value="">Selecione...</option>
           <option value="Filmes">Filmes</option>
-          <option value="Doramas">Doramas</option>
-          <option value="Animes">Animes</option>
           <option value="Séries">Séries</option>
           <option value="Desenho animado">Desenho animado</option>
           <option value="Filme de desenho animado">Filme de desenho animado</option>
-          <option value="Filme de Anime">Filme de Anime</option>
-          <option value="Filme Coreano">Filme Coreano</option>
         </select>
-      </label>
+      </div>
 
-      <label>Link da Capa/Poster URL:
+      <div class="input-group">
+        <label>Link da Capa/Poster URL:</label>
         <input type="url" id="imagem_url" required />
-      </label>
+      </div>
 
-      <label>Temporada (Opcional - deixe vazio para Obra Completa):
-        <input type="number" id="temporada" min="1" placeholder="Ex: 1" />
-      </label>
+      <div id="campo-temporada" class="input-group">
+        <label>Temporada:
+          <input type="number" id="temporada" min="1" placeholder="Ex: 1" />
+        </label>
+      </div>
     </fieldset>
 
     <fieldset>
       <legend>AVALIAÇÃO DO OPERADOR: <span id="nome-operador">Carregando...</span></legend>
-      
+
       <!-- 7 Critérios numéricos -->
       <label>História: <input type="number" id="historia" min="0" max="10" step="0.1" required /></label>
       <label>Personagens: <input type="number" id="personagens" min="0" max="10" step="0.1" required /></label>
-      <label>Visual / Animação: <input type="number" id="visual_animacao" min="0" max="10" step="0.1" required /></label>
+      <label>Visual / Animação: <input type="number" id="visual_animacao" min="0" max="10" step="0.1"
+          required /></label>
       <label>Som e Música: <input type="number" id="som_musica" min="0" max="10" step="0.1" required /></label>
       <label>Ritmo: <input type="number" id="ritmo" min="0" max="10" step="0.1" required /></label>
       <label>Originalidade: <input type="number" id="originalidade" min="0" max="10" step="0.1" required /></label>
@@ -78,15 +84,15 @@
       <label style="color: var(--neon-cyan);">Personagem Favorito:
         <input type="text" id="personagem_favorito" />
       </label>
-      
+
       <label style="color: var(--neon-cyan);">Recomendarias?
         <input type="text" id="recomendarias" placeholder="Sim/Não/Talvez..." />
       </label>
-      
+
       <label style="color: var(--neon-cyan);">Melhor Cena / Momento:
         <input type="text" id="melhor_cena" />
       </label>
-      
+
       <label style="color: var(--neon-cyan);">Superou as expectativas?
         <input type="text" id="superou_expectativas" />
       </label>
@@ -96,7 +102,7 @@
       </label>
     </fieldset>
 
-    <button type="submit">TRANSMITIR AVALIAÇÃO PARA A MATRIX</button>
+    <button type="submit" class="pulse-tech">Guardar avaliação</button>
   </form>
 
   <script type="module" src="index.js"></script>
