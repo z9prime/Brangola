@@ -104,6 +104,7 @@ function renderizarObras(obras) {
     const btnExcluir = clone.querySelector('.btn-excluir');
 
     const minhaAvaliacao = obra.avaliacoes.find(av => av.user_id === currentUser.id);
+    
     if (minhaAvaliacao) {
       btnEditar.style.display = 'inline-block';
       btnExcluir.style.display = 'inline-block';
@@ -117,11 +118,36 @@ function renderizarObras(obras) {
           const { error } = await supabase.from('avaliacoes').delete().eq('id', minhaAvaliacao.id);
           if (error) alert('Falha ao excluir: ' + error.message);
           else {
-            alert('Registo apagado.');
+            // Verificar se a obra ficou sem nada
+            const { data: restate } = await supabase.from('avaliacoes').select('id').eq('obra_id', obra.id);
+            if (!restate || restate.length === 0) {
+                if (confirm('Esta era a última avaliação. Deseja remover também o filme/série da base?')) {
+                    await supabase.from('obras').delete().eq('id', obra.id);
+                }
+            }
+            alert('Registo atualizado.');
             carregarHistorico();
           }
         }
       });
+    } else {
+        // Se NÃO tem avaliação minha, mas a obra está vazia (0 avaliações totais)
+        // permitir excluir a obra para limpar a base (como o caso do print do usuário)
+        if (!obra.avaliacoes || obra.avaliacoes.length === 0) {
+            btnExcluir.style.display = 'inline-block';
+            btnExcluir.textContent = 'Remover Obra Vazia';
+            btnExcluir.style.borderColor = '#ff4d4d';
+            btnExcluir.addEventListener('click', async () => {
+                if (confirm(`Deseja remover "${obra.titulo}" permanentemente por não possuir avaliações?`)) {
+                    const { error } = await supabase.from('obras').delete().eq('id', obra.id);
+                    if (error) alert('Erro ao remover obra: ' + error.message);
+                    else {
+                        alert('Obra removida da base estelar.');
+                        carregarHistorico();
+                    }
+                }
+            });
+        }
     }
 
     const mediasObj = processarMediasObra(obra.avaliacoes);
