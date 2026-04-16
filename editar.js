@@ -2,6 +2,7 @@ import { supabase } from './supabase.js';
 
 let currentUser = null;
 let currentAvaliacaoId = null;
+let currentObraId = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Verificação de Sessão Manual
@@ -42,14 +43,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
     await atualizarAvaliacao();
   });
+
+  document.getElementById('btn-excluir').addEventListener('click', async () => {
+    await excluirAvaliacao();
+  });
 });
 
 async function carregarDadosAvaliacao(id) {
   const { data, error } = await supabase
     .from('avaliacoes')
-    .select('*, obras (titulo, categoria, imagem_url)')
+    .select('*, obras (id, titulo, categoria, imagem_url)')
     .eq('id', id)
     .single();
+
+  if (data) currentObraId = data.obra_id;
 
   if (error || !data) {
     alert('Erro ao carregar avaliação: ' + (error?.message || 'Não encontrado'));
@@ -120,4 +127,48 @@ async function atualizarAvaliacao() {
     alert('Dados sincronizados com sucesso na base estelar!');
     window.location.href = 'historico.html';
   }
+}
+
+async function excluirAvaliacao() {
+  if (!confirm('EXTREMA ATENÇÃO: Deseja apagar permanentemente este relatório pessoal?')) return;
+
+  // 1. Excluir a avaliação
+  const { error: errorAval } = await supabase
+    .from('avaliacoes')
+    .delete()
+    .eq('id', currentAvaliacaoId);
+
+  if (errorAval) {
+    alert('Erro ao excluir avaliação: ' + errorAval.message);
+    return;
+  }
+
+  // 2. Verificar se a obra ainda tem outras avaliações
+  const { data: outras, error: errorCheck } = await supabase
+    .from('avaliacoes')
+    .select('id')
+    .eq('obra_id', currentObraId);
+
+  if (!errorCheck && (!outras || outras.length === 0)) {
+    const deletarObra = confirm('Esta era a única avaliação registrada para esta obra. Deseja excluir a OBRA (o filme/série) também da Base Estelar para não deixar registos órfãos?');
+    
+    if (deletarObra) {
+      const { error: errorObra } = await supabase
+        .from('obras')
+        .delete()
+        .eq('id', currentObraId);
+      
+      if (errorObra) {
+        alert('Avaliação excluída, mas houve erro ao apagar a obra: ' + errorObra.message);
+      } else {
+        alert('Avaliação e Obra removidas com sucesso.');
+      }
+    } else {
+      alert('Avaliação removida. A obra permanece na base.');
+    }
+  } else {
+    alert('Relatório pessoal eliminado. Outros operadores ainda possuem registos desta obra.');
+  }
+
+  window.location.href = 'historico.html';
 }
